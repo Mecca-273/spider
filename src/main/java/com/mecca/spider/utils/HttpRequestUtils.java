@@ -21,7 +21,6 @@ import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.entity.StringEntity;
 /**
  * httpclient工具类
- * @author   wzw
  * @version
  * @since    1.0
  */
