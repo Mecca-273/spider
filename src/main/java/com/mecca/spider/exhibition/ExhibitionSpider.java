@@ -32,7 +32,7 @@ public class ExhibitionSpider {
         String url = "http://www.haozhanhui.com/zhanlanjihua/";
         List ret = new ArrayList<>();
 //        spiderHZH(url);
-        int[] daytime = {4,5,6,7,8,9,10,11,12};
+        int[] daytime = {1,2,3,4,5,6,7,8,9,10,11,12};
         final String cnenaurl= "http://www.cnena.com/showroom/list_time.php?daytime=";
 //        http://www.cnena.com/showroom/listall-htm-ordertype-.html 【最新发布的展会信息大全】
 //        http://www.cnena.com/showroom/list_time.php?daytime=4&page=1  四月最新 分页
