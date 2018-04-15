@@ -68,9 +68,19 @@ public class ExhibitionMapper implements Mapper {
                 organizationUrl.append(m.group(1)).append("<br>");
             }
         });
+
         String content = doc.getElementById("exhdetail").html().replaceAll(htmlTag,"");;
         String contact = doc.getElementById("exhlinkinfo").parent().parent().child(1).html().replaceAll(htmlTag,"");;
         dto.initDetail(venue,venueUrl,venueArea,organization.toString(),organizationUrl.toString(),content,contact);
+
+        Matcher cont = p.matcher(contact);
+        while (cont.find()){
+            String name = cont.group("name");
+            String mobile = cont.group("mobile");
+            System.out.println(name+"---"+mobile);
+            dto.setUser1(name);
+            dto.setMobile(mobile);
+        }
         return dto;
     }
 }

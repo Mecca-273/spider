@@ -69,6 +69,7 @@ public class CnenaExhibitionMapper implements Mapper {
     }
 
     static Pattern orgReg = Pattern.compile("(.*?)<a");
+
     public static UserDTO parseDoc(UserDTO dto){
         Document doc = ExhibitionSpider.getDocument(dto.getUrl());
         if (doc==null){
@@ -89,9 +90,21 @@ public class CnenaExhibitionMapper implements Mapper {
             organization =m.group(1);
         }
         String contact = sub.get(2).html().replaceAll(htmlTag,"");
+
         String content = doc.select(".area-main").html().replaceAll(htmlTag,"");
         dto.initDetail(venue,venueUrl,null,organization,null,content,contact);
+
+        Matcher cont = p.matcher(contact);
+        while (cont.find()){
+            String name = cont.group("name");
+            String mobile = cont.group("mobile");
+            System.out.println(name+"---"+mobile);
+            dto.setUser1(name);
+            dto.setMobile(mobile);
+        }
         return dto;
     }
+
+
 
 }

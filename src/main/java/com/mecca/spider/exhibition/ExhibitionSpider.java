@@ -28,6 +28,9 @@ public class ExhibitionSpider {
     private final static String FILE_NAME2 = "cnena.txt";
     private final static String FILE_NAME_XLS = "HZH.xls";
     private final static String FILE_NAME_XLS2 = "cnena";
+
+    private static boolean exportExcel = true;
+
     public static void spider() {
         String url = "http://www.haozhanhui.com/zhanlanjihua/";
         List ret = new ArrayList<>();
@@ -57,6 +60,7 @@ public class ExhibitionSpider {
         listName.add("组织单位");
         listName.add("组织单位url");
         listName.add("地址");
+        listName.add("联系人");
         listName.add("电话");
         listName.add("联系方式1");
         listName.add("logo");
@@ -75,7 +79,8 @@ public class ExhibitionSpider {
         listId.add("organization");
         listId.add("organizationUrl");
         listId.add("address");
-        listId.add("telephone");
+        listId.add("user1");
+        listId.add("mobile");
         listId.add("contact");
         listId.add("logo");
         ExportBeanExcel<UserDTO> exportBeanExcelUtil = new ExportBeanExcel();
@@ -112,7 +117,10 @@ public class ExhibitionSpider {
             }
 
         }
-        exportExcel(retAll,FILE_NAME_XLS2+time+".xls");
+        if (exportExcel){
+            exportExcel(retAll,FILE_NAME_XLS2+time+".xls");
+        }
+
         return ret;
     }
 
@@ -127,7 +135,9 @@ public class ExhibitionSpider {
             FileWriteReadUtils.writeFile(FILE_PATH+FILE_NAME,dto.toString(),true);
         });
         System.out.println("开始导出 excel");
-        exportExcel(ret,FILE_NAME_XLS);
+        if (exportExcel){
+            exportExcel(ret,FILE_NAME_XLS);
+        }
         return ret;
     }
 
