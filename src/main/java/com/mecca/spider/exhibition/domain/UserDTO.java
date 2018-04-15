@@ -8,6 +8,7 @@ public class UserDTO {
     private String time;
     private String place;
     private String venue;
+    private String venueUrl;
 
     private String name;
     private String type;
@@ -18,7 +19,8 @@ public class UserDTO {
     private String num;
     private String visitorNum;
     private String content;
-    private String social;
+    private String organization;
+    private String organizationUrl;
     private String address;
     private String telephone;
     private String user1;
@@ -27,11 +29,84 @@ public class UserDTO {
     private String user2;
     private String mobile2;
     private String onlineStatus;
+    private String logo;
+
+    private String nextPageUrl;
+
+    private String contact;
+
+    public UserDTO(){}
+    public UserDTO(String nextPageUrl){
+        this.nextPageUrl = nextPageUrl;
+    }
+
+    public UserDTO initDetail(String venue, String venueUrl, String venueArea, String organization, String organizationUrl,
+                              String content, String contact){
+        this.venue = venue;
+        this.venueUrl = venueUrl;
+        this.area = venueArea;
+        this.organization = organization;
+        this.organizationUrl = organizationUrl;
+        this.content = content;
+        //此处须处理联系方式
+        this.contact = contact;
+        return this;
+    }
+
 
     @Override
     public String toString(){
-        return time+"\t"+city+"\t"+type+"\t"+"\t"+name+"\n";
+        return time+"\t"+city+"\t"+type+"\t"+"\t"+name+"\t"+url+"\n";
     }
+
+    public String getVenueUrl() {
+        return venueUrl;
+    }
+
+    public void setVenueUrl(String venueUrl) {
+        this.venueUrl = venueUrl;
+    }
+
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    public String getOrganizationUrl() {
+        return organizationUrl;
+    }
+
+    public void setOrganizationUrl(String organizationUrl) {
+        this.organizationUrl = organizationUrl;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getNextPageUrl() {
+        return nextPageUrl;
+    }
+
+    public void setNextPageUrl(String nextPageUrl) {
+        this.nextPageUrl = nextPageUrl;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     public String getTime() {
         return time;
     }
@@ -128,13 +203,6 @@ public class UserDTO {
         this.content = content;
     }
 
-    public String getSocial() {
-        return social;
-    }
-
-    public void setSocial(String social) {
-        this.social = social;
-    }
 
     public String getAddress() {
         return address;

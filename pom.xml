@@ -8,6 +8,11 @@
     <artifactId>spider</artifactId>
     <version>1.0.0</version>
     <dependencies>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
         <!-- 日志开始 -->
         <dependency>
             <groupId>log4j</groupId>

@@ -1,6 +1,6 @@
 package com.mecca.spider.exhibition;
 
-import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  * @since 18/4/13.
  */
 public interface ParseElements<T> {
-    List<T> parseElements(Element e,Mapper mapper);
+    List<T> parseElements(Elements e, Mapper mapper);
 
 }
