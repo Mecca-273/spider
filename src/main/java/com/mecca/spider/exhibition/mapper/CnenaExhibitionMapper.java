@@ -18,8 +18,9 @@ public class CnenaExhibitionMapper implements Mapper {
 
     private final static String URL_PRE = "http://www.cnena.com/showroom/";
     private final static Pattern page = Pattern.compile("red\">(\\d+)</font>/(\\d+)/(\\d+)");
+    private final static Pattern validTime = Pattern.compile("(\\d{4})-\\d{2}-\\d{2}");
 
-
+    private boolean finished = false;
     @Override
     public UserDTO mapper(Element element) {
         Elements tds = element.children().select("tbody>tr>td");
@@ -31,6 +32,13 @@ public class CnenaExhibitionMapper implements Mapper {
             dto.setLogo(tds.get(0).select("a>img").attr("src"));
             dto.setName(tds.get(1).select("a").attr("title"));
             dto.setTime(tds.get(2).select("center").html().replaceAll("&nbsp;",""));
+            Matcher m = validTime.matcher(dto.getTime());
+            if(m.find()){
+                String year = m.group(1);
+                if(Integer.parseInt(year)<=2016){
+                    finished = true;
+                }
+            }
 //        dto.setType();
             dto.setUrl(URL_PRE+tds.get(1).select("a").attr("href"));
 //        dto.setCity(null);
@@ -51,7 +59,7 @@ public class CnenaExhibitionMapper implements Mapper {
                 if (m.find()){
                     String cur = m.group(1);
                     String last = m.group(2);
-                    if (!cur.equals(last)){
+                    if (!cur.equals(last)&&!finished){
                         dto = new UserDTO(URL_PRE+nextUrl);
                     }
                 }
@@ -81,7 +89,7 @@ public class CnenaExhibitionMapper implements Mapper {
             organization =m.group(1);
         }
         String contact = sub.get(2).html().replaceAll(htmlTag,"");
-        String content = doc.select(".area-main").html().replace(htmlTag,"");
+        String content = doc.select(".area-main").html().replaceAll(htmlTag,"");
         dto.initDetail(venue,venueUrl,null,organization,null,content,contact);
         return dto;
     }
